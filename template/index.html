@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1>Test HTML</h1>
+    <!-- 水平线标签 -->
+    <hr>
+    <!-- 文本格式化标签: 两者效果一样,后者是前者的标签语义化,表示强调语义,重要的内容可以使用后者 -->
+    <!-- b/strong 加粗 -->
+    <!-- u/ins 下划线 -->
+    <!-- i/em 倾斜 -->
+    <!-- s/del 删除 -->
+    <h2>author: Tong Chen</h2>
+    <p>The course is taught in a practical way, with comprehensive cases from first-tier factories, using the shortest path to explain each technical point, with each chapter forming its own closed loop. 
+        <br>Project 1 is a corporate station, which is a quick and repeated practice of basic knowledge points</p>
+    <p>
+        <b>Project 2 is an e-commerce station, which upgrades the difficulty based on Project 1, to master the development process and layout standards of more complex web effects.</b>
+        <u>Strictly in accordance with the professional development process: professional measurement tools, to achieve 100% restoration of the design;</u>
+        <i>coding standards against the first-line large manufacturers development standards, to achieve the professional development from beginning to end.</i> 
+        <s>Students will be able to experience the development process and standards of the first-tier manufacturers.</s>
+    </p>
+    <!--标签可以有多个属性,用空格隔开,没有先后顺序; 
+        alt:但图片显示失败时的替换文本; title:鼠标悬停时显示的提示文本;
+        width和height只设置其中一个的话,图片将等比例缩放-->
+    <!--同级目录下的文件:目标图片.png”或"./目标图片.png" 
+        下级文件:“文件夹名/目标图片.png”
+        上级文件:“../文件夹名/目标图片.png”-->
+    <img src="../image/test.png" alt="Load image fail" title="test" width="300px" height="170px">
+
+    <br><br>
+    <h2>Try listening...</h2>
+    <!--controls显示播放音频/视频的控件;autoplay支持自动播放;loop支持循环播放-->
+    <!--Chrome不支持音频自动播放,支持视频自动播放,但必须是静音状态muted-->
+    <audio src="../music.mp3" controls></audio>
+    <h2>Try watching...</h2>
+    <video src="../video.mp4" controls autoplay muted></video>
+
+    <br><br>
+    <!--#表示空链接,点击之后不会跳转;
+        target:“_blank”跳转到新窗口,"_self"默认值,在当前窗口跳转-->
+    <a href="./bookCourse.html">Want some useful courses? Book now!</a>
+
+    <!-- 无序列表:ul中只能包含li标签,li标签中可以包含任意标签 -->
+    <ul>
+        <li><a href="#" target="_blank">HTML</a></li>
+        <li><a href="#" target="_blank">CSS3</a></li>
+        <li><a href="#" target="_blank">JavaScript</a></li>
+    </ul>
+    <!-- 有序列表:ol中只能包含li标签,li标签中可以包含任意标签 -->
+    <h2>Top courses</h2>
+    <ol>
+        <li>C/C++</li>
+        <li>JavaEE</li>
+    </ol>
+    <!-- 自定义列表:dl中只能包含dt和dd标签,dd默认显示缩进 -->
+    <dl>
+        <dt><h2>Help Center</h2></dt>
+        <dd>Account manage</dd>
+        <dd>Handbook</dd>
+    </dl>
+
+    <!-- 表格:table > tr行 > td单元格 
+        border:边框宽度; width/height:表格的宽度/高度(一般在css中设置)
+        caption:表格大标题; th:表头单元格
+        结构标签:thead/tbody/tfoot可省略,效果没有区别,浏览器解析时效率更高 -->
+    <table border="1" width="500">
+        <caption><strong>Courses Information</strong></caption>
+        <thead>
+            <tr>
+                <th>Courses</th>
+                <th>Professor</th>
+                <th>Booking</th>
+                <th>Pass</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!--合并单元格
+                    1.保留左上元素,删除右下元素
+                    2.给保留的单元格设置rowspan/colspan
+                    不能跨结构(thead/tbody/tfoot)合并单元格-->
+                <td>HTML&CSS</td>
+                <td rowspan="2">Ola</td>
+                <td>500</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>JavaScript</td>
+                <td>1500</td>
+                <td>700</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Summary</td>
+                <td>CS department</td>
+                <td colspan="2">50%(1000/2000)</td>
+            </tr>
+
+        </tfoot>
+    </table>
+
+</body>
+</html>

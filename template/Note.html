@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS线程</title>
+</head>
+<body>
+    JS引擎 - 单线程
+    但可以模拟多线程
+
+    方法: 轮转时间片
+         短时间内轮流执行多个任务的片段
+
+    1. 在有任务1 任务2的情况下
+    2. 切分任务1 任务2
+    3. 随机排列这些任务片段, 组成队列
+    4. 按照队列顺序将任务片段送进JS线程
+    5. JS线程执行
+
+</body>
+</html>
