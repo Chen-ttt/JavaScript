@@ -1,6 +1,11 @@
 // 类型转换
 
 // 显式
+console.log("显式类型转换!!!");
+
+/**
+ * 其他类型转number
+ */
 // Number()
 var a = "1.23";
 console.log(typeof(Number(a)) + ": " + Number(a)); // 1.23
@@ -53,6 +58,9 @@ console.log(typeof(String(a)) + ": "+String(a)); // "undefined"
 a = 5;
 console.log(typeof(a.toString(2)) + ": " + a.toString(2)); //101
 
+/**
+ * 其他类型转Boolean
+ */
 // Boolean() - 只有0, null, undefined, Nan, "", false为false
 a = 0;
 console.log(typeof(Boolean(a)) + ": "+Boolean(a)); // false
@@ -69,5 +77,78 @@ a = 'false';
 console.log(typeof(Boolean(a)) + ": "+Boolean(a)); // true
 
 // 隐式
-console.log(typeof(1-"1")); // number
-console.log(typeof("1"-"1")); // number
+console.log("\n隐式类型转换!!!");
+
+/**
+ * 运算符中的隐式类型转换
+ */
+// +运算 - 转为string
+var b = 'a' + 1;
+console.log("\"a\"+1: ", b); // a1
+b = 1+"1";
+console.log("1+\"1\": return",b,typeof(b)); // 11,string
+b = "1"+"1";
+console.log("\"1\"+\"1\": return",b,typeof(b)); // 11,string
+
+// - * / % ++ --运算 - 转为number
+b = 1-"1";
+console.log("1-\"1\": return",b,typeof(b)); // 0,number
+b = "1"-"1";
+console.log("\"1\"-\"1\": return",b,typeof(b)); // 0.number
+
+b = '123';
+b++;
+console.log("\"123\"++: ", b); // 124: Number('123') -> 123++
+
+b = '3' * 2;
+console.log("\"3\"*2: ", b); // 6
+
+// 比较运算
+// 1. 两string则比较ASCII
+// 2. 其中有number则将所有值转为number再比较
+b = 1 > "2";
+console.log("1>\"2\": ", b); // false
+
+b = "1" > 2;
+console.log("\"1\">2: ", b); // false
+
+b = "10" > "2";
+console.log("\"10\">\"2\": ", b); // 逐位比较, 1小于2, false
+
+b = "1" == 1;
+console.log("\"1\"==1: ", b); // true
+
+b = "1" === 1;
+console.log("\"1\"===1: ", b); // false
+
+b = NaN == NaN;
+console.log("NaN==NaN: ", b); // false!!! NaN不等于任何东西!
+
+b = undefined == undefined;
+console.log("undefined==undefined: ", b); // true
+
+b = 2 > 1 > 3;
+console.log("2 > 1 > 3: ", b); // false
+
+b = 2 > 1 == 1;
+console.log("2 > 1 == 1: ", b); // true
+
+// 会先将undefined转为number, 结果为NaN
+b = undefined > 0;
+console.log("undefined > 0: ", b); // false
+b = undefined < 0;
+console.log("undefined < 0: ", b); // false
+b = undefined == 0;
+console.log("undefined == 0: ", b); // false
+
+b = undefined == null;
+console.log("undefined == null: ", b); // true!!! 特殊情况
+b = undefined === null;
+console.log("undefined === null: ", b); // false
+
+// 正负运算 - 仍将字符串转为number类型,再变为正数或负数
+b = '123'
+console.log("-\"123\": ", (-b), ", type:", typeof(-b)); // -123
+b = 'abc'
+console.log("-\"abc\": ", (-b), ", type:", typeof(-b)); // NaN
+
