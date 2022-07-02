@@ -8,15 +8,17 @@ console.log("显式类型转换!!!");
  */
 // Number()
 var a = "1.23";
-console.log(typeof(Number(a)) + ": " + Number(a)); // 1.23
+console.log("\"1.23\": "+typeof(Number(a)),Number(a)); // 1.23
 a = true;
-console.log(typeof(Number(a)) + ": " + Number(a)); // 1
+console.log("true: "+typeof(Number(a)),Number(a)); // 1
 a = null;
-console.log(typeof(Number(a)) + ": " + Number(a)); // 0
+console.log("null: "+typeof(Number(a)),Number(a)); // 0
 a = undefined;
-console.log(typeof(Number(a)) + ": " + Number(a)); // NaN
+console.log("undefined: "+typeof(Number(a)),Number(a)); // NaN
 a = "a";
-console.log(typeof(Number(a)) + ": " + Number(a)); // NaN
+console.log("\"a\": "+typeof(Number(a)),Number(a)); // NaN
+a = "NaN";
+console.log("\"NaN\": "+typeof(Number(a)),Number(a)); // NaN!!!
 
 // parseInt() - 将字符串转换为整数并返回
 a = "1.23";
@@ -152,3 +154,14 @@ console.log("-\"123\": ", (-b), ", type:", typeof(-b)); // -123
 b = 'abc'
 console.log("-\"abc\": ", (-b), ", type:", typeof(-b)); // NaN
 
+/**
+ * isNaN()中的隐式类型转换
+ * 当传入非number类型的参数时,将先把参数转为number再判断是否为NaN
+ */
+console.log("123 is NaN? ", isNaN(123));
+console.log("\"123\" is NaN? ", isNaN("123"));
+console.log("\"abc\" is NaN? ", isNaN("abc"));
+console.log("\"NaN\" is NaN? ", isNaN("NaN"));
+console.log("false is NaN? ", isNaN(false));
+console.log("undefined is NaN? ", isNaN(undefined));
+console.log("null is NaN? ", isNaN(null));
