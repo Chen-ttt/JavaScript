@@ -13,13 +13,16 @@ var person = {
 };
 console.log(person.name, "'s job is", person.job);
 
-// typeof - 返回一个字符串
-// 该字符串的值:number/string/boolean/undefined/object/function
+// typeof
 console.log(typeof(null)); // object(特殊情况bug,null最早是指空对象指针,因此类型为object)
 console.log(typeof(undefined)); // undefined
 console.log(typeof({})); // object
 console.log(typeof([])); // object
 console.log(typeof(function(){})); // function
 
-// console.log(a); // 报错
+console.log(a); 
 console.log(typeof(a)); // undefined
+
+console.log(typeof(1-"1")); // number
+console.log(typeof("1"-"1")); // number
+
