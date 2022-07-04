@@ -71,3 +71,20 @@ testOuter();
 // testInner(); // 调用inner函数会报错
 // console.log(outer); // 输出局部变量会报错
 console.log("After run, global is ", global);
+
+
+// 在函数外尝试操作未定义的变量会报错,而typeof不会报错,结果为undefined
+// 在函数内尝试操作未定义的参数不会报错,打印该参数只会输出undefined
+
+/**
+ * 参数默认值
+ * 传入undefined以使用默认值: 当调用函数时给参数a传入undefined,程序会自动去查看形参默认值, 使用a=1
+ * 当不给形参设置默认值时,都默认为undefined
+ */
+function defaultTest(a = 1, b){ // es5不支持这种写法,是es6新特性
+    // 可以这样写
+    var a = arguments[0] || 1;
+    var b = arguments[1] || 2;
+    console.log("Default:", a, b);
+}
+defaultTest(undefined, 2);
