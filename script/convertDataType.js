@@ -171,3 +171,36 @@ console.log("\"NaN\" is NaN? ", isNaN("NaN"));
 console.log("false is NaN? ", isNaN(false));
 console.log("undefined is NaN? ", isNaN(undefined));
 console.log("null is NaN? ", isNaN(null));
+
+/**
+ * Assignment 1
+ *  1. typeof(undef): 'undefined'
+ *  2. -true: -1
+ *  3. +undefined: NaN
+ *  4. (-true) + (+undefined): NaN
+ *  5. (-true) + (+undefined) + '': 'NaN'
+ *  6. true && true: 进入if
+ */
+if(typeof(undef) && (-true) + (+undefined) + ''){
+    console.log("Assignment 1 pass!");
+} else console.log("Assignment 1 fail!");
+
+/**
+ * Assignment 2
+ *  1. 5 * '3': 15
+ *  2. 1 + 15: 16
+ *  3. 16 === 16: true
+ */
+if(1 + 5 * '3' === 16){
+    console.log("Assignment 2 pass!");
+} else console.log("Assignment 2 fail!");
+
+/**
+ * Assignment 3
+ *  1. !!' ': true // ' '为true
+ *  2. !!'': false
+ *  3. !!false: false
+ *  4. true + false - false: 1+0-0=1
+ *  5. ||运算 遇真, 直接返回1
+ */
+console.log(!!' ' + !!'' - !!false || "Assignment 3 fail!");
