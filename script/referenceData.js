@@ -23,3 +23,15 @@ console.log(typeof(function(){})); // function
 
 // console.log(a); // 报错
 console.log(typeof(a)); // undefined
+
+/**
+ * 函数也是一种对象类型 引用类型
+ * 可以调用属性
+ */
+function test(a,b){
+    console.log("执行到test函数啦!");
+}
+console.log(test.length);
+console.log(test.name);
+console.log(test.prototype);
+console.log(test.arguments);
