@@ -237,11 +237,10 @@ console.log(assignment1());
 /**
  * 预编译
  *    1. GO = {
- *          assignment2: function assignment2(){},
- *          n: function n(){}
+ *          assignment2: function assignment2(){}
  *       }
  *    2. AO = {
- *          n = undefined
+ *          n = undefined -> function n(){}
  *       }
  * 
  * 执行
@@ -260,7 +259,34 @@ function assignment2(){
 }
 console.log(assignment2());
 
-
+/**
+ * 预编译
+ *    1. GO = {
+ *          o: undefined,
+ *          assignment3: function assignment3(){},
+ *          s: undefined
+ *       }
+ *    2. AO = {
+ *          p: function p(){},
+ *          q: undefined,
+ *          r: undefined,
+ *          o: undefined
+ *       }
+ * 
+ * 执行
+ *    1. GO = {
+ *          o: 1,
+ *          assignment3: function assignment3(){},
+ *          s: 5
+ *       }
+ *    2. 执行到if时,o是undefined,无法进入if
+ *       AO = {
+ *          p: 2, // arguments[0] = 2;
+ *          q: undefined,
+ *          r: undefined,
+ *          o: 4
+ *       }
+ */
 o = 1;
 function assignment3(p){
     function p(){};
@@ -274,8 +300,9 @@ function assignment3(p){
     var o;
     console.log("q:", q);
     s = 5;
-    console.log(r);
-    console.log(o);
+    console.log("r:", r);
+    console.log("o:", o);
 }
 var o;
 assignment3(1);
+console.log("o:", o, "s:", s);
