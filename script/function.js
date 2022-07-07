@@ -35,7 +35,8 @@ var functionTest2 = function(){
  * 实参: 函数内可通过arguments查看传入的实参,arguments实质上是一个数组
  * Tips: 1. 可以利用arguments和for循环做实参的累加,累乘
  *       2. 尝试给为传入实参的形参赋值或打印,不会报错,会显示undefined
- *       3. 形参储存在stack内存中,实参数组arguments储存在heap内存中.两* 者之间存在映射关系,因此当给形参a赋值时,arguments[0]的值也会相应改变;而* 给c赋值时,若arguments[2]没有相应的实参传入,则赋值无法完成,但不会报错
+ *       3. 形参储存在stack内存中,实参数组arguments储存在heap内存中.两者之间存在映射关系,因此当给形参a赋值时,arguments[0]的值也会相应改变;而给c赋值时,若arguments[2]没有相应的实参传入,则赋值无法完成,但不会报错
+ *       4. arguments代表实参列表,与形参有对应关系,任何一方赋值都会改变参数值
  */
 function test3(a, b, c){ // a,b,c - 形参
     console.log("实参个数 ", arguments.length);
