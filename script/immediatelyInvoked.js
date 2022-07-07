@@ -148,8 +148,7 @@ console.log("例子12:", a);
 function test13(){
     var i = 0;
     function test14(){
-        i++;
-        console.log(i);
+        console.log(++i);
     }
     return test14;
 }
