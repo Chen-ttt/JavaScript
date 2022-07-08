@@ -24,6 +24,18 @@ console.log("After change:", arr);
 // indexOf函数可以查找元素在数组中的下标,查找失败则返回-1
 console.log("View index of \"99\":", arr.indexOf('99'));
 
+/**
+ * arrayObj.slice(start, end) 根据索引位置返回一个新的数组
+ *   1. start参数是必填, 设定新数组的起始位置
+ *   2. end参数为选填, 若不写, 则默认到数组结尾; 若传入end参数, 则返回的数组不包含end位置
+ */
+var nums = [0, 1, 2, 3, 4, 5];
+console.log("从3开始切分", nums.slice(3)); // [3,4,5]
+console.log("切分0 - 3", nums.slice(0, 3)); // [0,1,2]
+// -1指最后一个元素，-2指倒数第二个元素，以此类推
+console.log("切分末尾元素", nums.slice(-1));
+console.log("切分0 - -1", nums.slice(0, -1));
+
 // object: key-value pair
 var person = {
     name: 'Any',
