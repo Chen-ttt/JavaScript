@@ -124,3 +124,21 @@ console.log("赋值prototype能改变gender吗?", People.prototype);
 People.prototype.gender = '333'; // 不能能改
 console.log("赋值prototype能改变gender吗?", mary);
 console.log("赋值prototype能改变gender吗?", People.prototype);
+
+// 笔试题
+function Car(){
+    this.brand = 'Benz'
+}
+
+Car.prototype = {
+    brand: 'Mazda',
+    intro: function(){
+        console.log("Brand is", this.brand);
+    }
+}
+
+var car = new Car();
+car.intro();
+// 输出this.brand, 谁调用 this就指向谁; 此时this指向实例化对象car本身, 而对象本身就有brand属性, 因此一定输出的是Benz
+Car.prototype.intro();
+// 此时this指向Car.prototype, 因此一定输出Car.prototype中的brand - Mazda
