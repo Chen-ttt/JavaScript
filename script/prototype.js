@@ -73,6 +73,9 @@ People.prototype.gender = 'Male';
 var mary = new People('Mary', 18);
 console.log("查看Mary的性别", mary.gender); // 先在实例化对象中找,找不到则到this.__proto__中找
 
+// 在没有重写前, 实例对象的__proto__等于构造函数的prototype
+console.log(mary.__proto__ == People.prototype);
+
 // 构造器constructor指向构造函数本身
 console.log(mary.constructor);
 console.log(People.prototype.constructor);
