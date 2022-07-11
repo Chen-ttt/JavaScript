@@ -1,126 +1,108 @@
 /**
- * 原型 & 原型链
- *   prototype: 构造函数实例化的所有对象的公共祖先
- *              所有被该构造函数实例化出来的对象都将继承原型上的属性和方法
+ * 原型链
  */
 
-// 将共有的固定的属性和方法写在原型中,所有对象自动继承
+// 继承
+Professor.prototype.topSkill = 'JAVA';
+function Professor(){};
+var professor = new Professor();
 
-function Phone(color, brand){
-    this.color = color;
-    this.brand = brand;
-}
-
-Phone.prototype.screen = '11';
-Phone.prototype.rom = '64G';
-Phone.prototype.call = function(){
-    console.log("I'm calling...");
-}
-
-var p1 = new Phone('red', 'iphone');
-console.log("phone1访问screen", p1.screen);
-console.log("phone1访问rom", p1.rom);
-p1.call();
-
-/**
- * 通过实例化的对象对prototype里的属性和方法进行增删改,都不行
- */
-
-delete p1.screen;
-console.log("删除原型中screen属性有效果吗?", Phone.prototype);
-p1.screen = '0';
-console.log("修改原型中screen属性有效果吗?", Phone.prototype);
-
-/**
- * 原型一般写成对象形式
- *   但若用这种方式,则一些prototype原有自带的属性会被覆盖掉,例如constrcutor
- */
-console.log("用对象定义原型之前,constructor", Phone.prototype.constructor);
-Phone.prototype = {
-    screen: '11',
-    rom: '64G',
-    price: '6499',
-    call: function(){
-        console.log("I'm calling...");
-    },
-    reopen: function(){
-        console.log("I'm reopening...");
+Teacher.prototype = professor;
+function Teacher(){
+    this.goodSkill = 'JS',
+    this.success = {
+        tencent: 10,
+        baidu: 20
     }
 }
-console.log("用对象定义原型之后,constructor", Phone.prototype.constructor);
+var teacher = new Teacher();
 
-// Hint: 通过定义prototype也可以硬改一个构造函数
-//       也可以硬改一个别人的prototype
-Phone.prototype = {
-    constructor: function(){}
+Student.prototype = teacher;
+function Student(){
+    this.basicSkill = 'HTML'
 }
-console.log(Phone.prototype);
+var student = new Student();
 
-
-// 复盘 - objectInstance.js
-function People(name, age){
-    // this = {}; // 隐式添加这句
-    // 其实是
-    // this = {
-    //     __proto__: People.prototype
-    //     // __proto__是装原型的容器,是prototype的键名
-    // };
-    this.name = name;
-    this.age = age;
-    // return this; // 隐式添加这句
-}
-People.prototype.gender = 'Male';
-var mary = new People('Mary', 18);
-console.log("查看Mary的性别", mary.gender); // 先在实例化对象中找,找不到则到this.__proto__中找
-
-// 构造器constructor指向构造函数本身
-console.log(mary.constructor);
-console.log(People.prototype.constructor);
-
+// 原型链的终点 - Object.prototype!!! - Object.prototype里面再也没有proto了
+// !!!特例 - Object.create(null)返回的新对象没有原型
+console.log(student);
+console.log("空对象", Object.create(null));
 /**
- * !!! 原型的动态性
- * 体现在实例和原型之间的松散连接关系使得原型的属性改动可以反映在实例上; 所谓松散连接关系, 即为实例与原型的连接是一个指针
+ * !!!注意
+ * 1. Object.prototype底下保存了一个toString方法
+ * 2. 在浏览器的控制台中, __proto__字样如果是浅色, 表示它是Object.prototype, 到头了; 其他原型的键__proto__都是深色
  */
 
-/**
- * 例.对实例化产生的对象, 要修改prototype中的属性: gender
- * 
- * 1. 情况1
- * 使用对象直面量进行重新赋值, 将破坏动态性
- * 
- *    结果: 可以看到, mary的prototype中gender仍然是‘Male’, 未被修改; 但是mary的constructor中仍有一个prototype, 其中的gender已变成‘Female’
- * 
- *   原因: 这是因为, 在实例化mary时, 构造函数中隐式创建了this对象, this.__proto__指向了当时构造函数默认的prototype, 此时prototype中的性别就是‘Male’
- *        而在使用了对象直面量对prototype重新赋值后, People.prototype就指向了新的object的地址; 但mary仍指向原来默认的prototype
- *        因此输出mary会发现, mary的prototype中的gender并没有改变, 而构造函数的prototype变了
- */
-People.prototype = { // 改不了
-    gender: 'Female'
-}
-console.log("重写prototype能改变gender吗?", mary);
-console.log("重写prototype能改变gender吗?", People.prototype);
+// 以下两句完全一样, 原型直接就是终点 - Object.prototype
+// var obj = {}
+// var obj = new Object();
 
 /**
- * 2. 情况2
- * 实例化一个新的对象tong, 并对prototype中的属性重新赋值, 则不会破坏动态性
+ * 子类是否可以修改父类属性? - 可以, 但不建议
  * 
- *   结果: 直接改变了对象中的prototype属性和对象中的constructor中的prototype属性
- *   原因: 在上一步 重写ptototype之后, People.prototype(即构造函数中的原型)已经指向了新object的地址; 因此在重写后实例化的新对象(例如tong)已经指向新的prototype
- *        并且直接赋值的方式并没有改变prototype的地址, 情况2相当于对当前的prototype进行原地改动, 因此不会发生指向错误
+ * 1. 原始值属性
+ *    不会修改父类的goodSkill, 而是给自己这个实例添加了goodSkill属性
+ *    原因: 打印或取值语句中,  发现该实例没有对应的属性, 将到父类中寻找; 而赋值语句中, 发现该实例没有对应的属性, 直接添加属性
+ * 
+ * 2. 引用值属性
+ *    将修改父类success中的tencent数值, 本实例没有变化
  */
-var tong = new People('Tong', 19);
-People.prototype.gender = 'HaHa'; // 能改
-console.log("赋值prototype能改变gender吗?", tong);
-console.log("赋值prototype能改变gender吗?", People.prototype);
+student.goodSkill = 'CSS';
+console.log("修改原始值属性", student);
+
+student.success.tencent = 30;
+console.log("修改引用值属性", student);
+
 
 /**
- * 3. 情况3
- * 在情况1重写了prototype之后, 是否能通过重新赋值来改变mary对象的gender属性呢?
+ * Object.create(对象/null) - 创建对象
+ * 调用该函数则必须传参, 可传入对象或null, 该对象参数会成为新创建出的对象的prototype
  * 
- *   结果: 可以看到, mary的prototype中gender仍然是‘Male’, 未被修改; 但是mary的constructor中仍有一个prototype, 其中的gender已变成‘333’
- *   原因: 道理和情况1一样, 在重写ptototype之后, People.prototype(即构造函数中的原型)已经指向了新object的地址; 只有在重写后实例化的新对象(例如tong)才能指向新的prototype; 而在这之前实例化的旧对象(例如mary)仍指向之前的默认的老prototype
- *        而直接赋值改变的是新prototype(因此能在constructor中的prototype看到改变为'333'); 而打印mary时, mary的prototype仍引用的是旧prototype, gender仍是‘Male’
+ * 好处:
+ *     可以自定义原型, 让别的实例来成为自己的原型, 实现继承
  */
-People.prototype.gender = '333'; // 不能能改
-console.log("赋值prototype能改变gender吗?", mary);
-console.log("赋值prototype能改变gender吗?", People.prototype);
+function Obj(){};
+Obj.prototype.num = 1;
+var obj1 = Object.create(Obj.prototype);
+var obj2 = new Obj();
+console.log("通过Object.create和自定义构造函数原型创建对象", obj1); // 这俩一模一样
+console.log("通过自定义构造函数创建对象", obj2);
+
+var testProto = {
+    num: 2
+};
+var obj3 = Object.create(testProto);
+console.log("通过Object.create创建对象", obj3); // 这个不一样
+
+// !!!特例 - Object.create(null)返回的新对象没有原型
+var nullObj = Object.create(null);
+// 可以手动添吗?
+nullObj.prototype= {
+    num: 1
+};
+console.log("给空对象添加原型", nullObj);
+console.log("给空对象添加原型", nullObj.num);
+
+// 结果undefined
+// 原因: prototype作为键值被添加; 而原型不能手动添加; 可以更改, 不能自造
+
+/**
+ * undefined和null可以使用toString()吗?
+ * 
+ * 不可以, 它俩没有这个方法, 都会报错
+ *      1.不能变成包装类, 继承不了toString()
+ *      2.没有原型, 没有Object.prototype, 没有toString
+ */
+// console.log(undefined.toString());
+// console.log(null.toString());
+// 复习
+var num = 1;
+console.log("包装类的tostring", num.toString());
+console.log("原型上继承来的toString", obj1.toString());
+
+// 笔试题
+document.write(num); // document.write有隐式的类型转换, 会调用参数的toString方法
+document.write(obj1);
+document.write(nullObj); // 因此这行将报错
+
+// 可以重写原型链上的方法
