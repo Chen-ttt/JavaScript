@@ -204,3 +204,12 @@ if(1 + 5 * '3' === 16){
  *  5. ||运算 遇真, 直接返回1
  */
 console.log(!!' ' + !!'' - !!false || "Assignment 3 fail!");
+
+
+console.log(1 + NaN);
+console.log("1" + 3);
+console.log(1 + undefined);
+console.log(1 + null);
+console.log(1 + {});
+console.log(1 + []);
+console.log([] + {});
