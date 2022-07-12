@@ -34,11 +34,13 @@ a = '1111';
 console.log(typeof(parseInt(a,2)) + ": " + parseInt(a,2)); // 15
 a = '0xF';
 console.log(typeof(parseInt(a,16)) + ": "+parseInt(a,16)); // 15
-// 如果字符串以非数字字符开头,则返回 NaN; 但如果是数值+字母,则转换前半部分
+// 如果字符串以非数字字符开头,则返回 NaN; 但如果是数值+字母,则看到非数为止, 只转换是数字的那一部分
 a = "a123";
 console.log(typeof(parseInt(a)) + ": " + parseInt(a)); // NaN
 a = "123a";
 console.log(typeof(parseInt(a)) + ": " + parseInt(a)); // 123
+a = "1a12";
+console.log(typeof(parseInt(a)) + ": " + parseInt(a)); // 1
 a = true;
 console.log(typeof(parseInt(a)) + ": " + parseInt(a)); // NaN
 a = null;
