@@ -3,6 +3,7 @@
  */
 
 // 继承
+// Professor - Teacher - Student
 Professor.prototype.topSkill = 'JAVA';
 function Professor(){};
 var professor = new Professor();
@@ -16,6 +17,23 @@ function Teacher(){
     }
 }
 var teacher = new Teacher();
+console.log(teacher);
+// !!! 这里要理解
+/**
+ * teacher = {
+ *      goodSkill: 'JS',
+ *      success: {...},
+ *      // Teacher自身构造函数中this隐式语句产生的原型(this={__proto__:...})
+ *      __proto__: {
+ *          // 赋值的对象professor, 该实例由构造函数Professor中this隐式语句产生的(this={__proto__:...})
+ *          __proto__:{
+ *              topSkill: 'JAVA',
+ *              constructor: f Professor(){...},
+ *              __proto__: Object.prototype
+ *          }
+ *      }
+ * }
+ */
 
 Student.prototype = teacher;
 function Student(){
@@ -33,9 +51,11 @@ console.log("空对象", Object.create(null));
  * 2. 在浏览器的控制台中, __proto__字样如果是浅色, 表示它是Object.prototype, 到头了; 其他原型的键__proto__都是深色
  */
 
+
 // 以下两句完全一样, 原型直接就是终点 - Object.prototype
 // var obj = {}
 // var obj = new Object();
+
 
 /**
  * 子类是否可以修改父类属性? - 可以, 但不建议
