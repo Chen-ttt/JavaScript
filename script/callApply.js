@@ -24,6 +24,7 @@ function Teacher(name, mSkill){
 }
 
 function Student(name, mSkill, age, major){
+    // 此时Teacher()执行的过程中, this不再指向调用它的实例对象, 而是第一个传入的参数this(即当前这个student实例对象)
     Teacher.apply(this, [name, mSkill]);
     this.age = age;
     this.major = major;
