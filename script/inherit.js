@@ -52,7 +52,7 @@ console.log(newS3);
 console.log()
 
 // 将上述方法封装成函数
-function interit(Target, Origin){
+function inherit(Target, Origin){
     function Buffer(){};
     Buffer.prototype = Origin.prototype;
     Target.prototype = new Buffer();
