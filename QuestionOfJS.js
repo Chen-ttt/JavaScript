@@ -122,3 +122,12 @@ function test12(){
 }
 test12();
 new test12();
+
+//foo('outside'); // TypeError: foo is not a function
+{
+  function foo(location) {
+    console.log('foo is called ' + location);
+  }
+  //foo('inside'); // 'foo is called inside'
+}
+foo('outside');
