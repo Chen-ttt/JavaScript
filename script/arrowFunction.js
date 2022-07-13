@@ -35,7 +35,7 @@ var f5 = (x) => {return {foo: x}};
 console.log(f5(4));
 
 /**
- * 箭头函数中的this是静止的, 始终指向该箭头函数声明时所在作用域下的this; 且箭头函数中的this是无法通过call, apply和bind重新定向的
+ * 箭头函数中的this是静止的, 始终指向该箭头函数声明时所在作用域下的this(i.e.上层作用域的this); 且箭头函数中的this是无法通过call, apply和bind重新定向的
  */
 // 例子6中, f6在全局作用域下声明, 此时的this指向window
 var name = 'tong';
