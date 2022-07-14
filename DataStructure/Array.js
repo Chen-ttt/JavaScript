@@ -30,3 +30,12 @@ console.log(score.indexOf(99));
 console.log(score.indexOf(2222));
 
 console.log(score.indexOf(99, 2));
+
+/**
+ * map(function(currentValue, index, arr))
+ * 创建一个新数组, 其结果是该数组中每一个元素调用一次该function的返回值, 不改变原数组, 也不对空数组进行操作
+ */
+
+var arr1 = [1, 2, 3];
+var result = arr1.map(value => value * 2);
+console.log(result);
