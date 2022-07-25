@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: Tong Chen
+ * @Date: 2022-07-13 19:30:09
+ * @LastEditTime: 2022-07-25 11:55:54
+ * @LastEditors:  
+ */
 /**
  * Array
  */
@@ -9,11 +16,11 @@
  * 参数为function, 对每个元素执行该function, 若返回true则保留该元素
  * currentValue是function的必要参数, 即当前元素的值
  */
-var arr = [1, 1, 2, 3, 2, 4];
+var arr = [1, 1, 2, 3, 2, 4]
 var newArr = arr.filter((num) => {
-    return num > 2? true : false;
+  return num > 2 ? true : false
 })
-console.log(newArr);
+console.log(newArr)
 
 /**
  * indexOf(item)
@@ -25,17 +32,30 @@ console.log(newArr);
  * start范围是0到length-1
  * 
  */
-var score = [99, 98, 50, 99];
-console.log(score.indexOf(99));
-console.log(score.indexOf(2222));
+var score = [99, 98, 50, 99]
+console.log(score.indexOf(99))
+console.log(score.indexOf(2222))
 
-console.log(score.indexOf(99, 2));
+console.log(score.indexOf(99, 2))
 
 /**
  * map(function(currentValue, index, arr))
  * 创建一个新数组, 其结果是该数组中每一个元素调用一次该function的返回值, 不改变原数组, 也不对空数组进行操作
  */
 
-var arr1 = [1, 2, 3];
-var result = arr1.map(value => value * 2);
-console.log(result);
+var arr1 = [1, 2, 3]
+var result = arr1.map(value => value * 2)
+console.log(result)
+
+/**
+ * shift()
+ * 将数组中第一个元素删除并返回该元素的值
+ * 用于实现队列!!!
+ * 
+ * 注意: 该方法不创建新数组, 直接改变原数组, 和pop一样
+ *      如果数组为空, 那么shift不进行任何操作, 并返回undefined
+ */
+
+var firstNum = arr1.shift()
+console.log("shift模拟队列: 首元素", firstNum)
+console.log("shift模拟队列: 首元素出队后", arr1)
