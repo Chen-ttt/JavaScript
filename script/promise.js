@@ -1,7 +1,22 @@
 /**
  * Promise
+ * 异步编程的一种解决方案, 用链式调用的方式解决回调地狱
+ * 本质上来说promise是JS内置对象, Promise是构造函数, 封装一个异步操作并获取其成功/失败的值
  * 
- * pending & resolved & rejected
+ * 1. pending -> resolved 或 rejected
+ *    一旦状态改变后就不可再变, 不可逆
+ * 2. new Promise为同步函数, 一旦创建实例就立即执行, 无法取消
+ */
+
+/**
+ * 基本使用
+ * const p1 = new Promise((resolve, reject) => {
+ *    if(// 异步操作成功){
+ *      resolve(value);
+ *    } else {
+ *      reject(reason);
+ *    }
+ * })
  */
 
 // 1. 如何改变promise状态
@@ -78,6 +93,21 @@ console.log("p5第2次回调返回:", res4)
  * 如果抛出异常或人为抛出异常, 则返回rejected状态的promise
  */
 
+// 3. finally - 不管成功与否, 都会执行finally
+p5.finally(() => {
+  console.log("finally")
+})
+
+
+const p7 = Promise.resolve()
+p7.then(() => {
+  console.log("p7的第", 1, "个then执行啦")
+  return 2
+}).then((value) => {
+  console.log("p7返回的value:", value)
+  console.log("p7的第", value, "个then执行啦")
+})
+
 
 // 面试题
 console.log("面试题")
@@ -93,3 +123,16 @@ p6.then(() => {
 }).catch(() => {
   console.log(4) // 因此触发这里的then, 输出4
 })
+
+
+// 如果需要在循环中执行异步操作, 不可以使用forEach或map这一类方法
+// 因为forEach或map会立即返回, 并不会等到所有的异步操作都执完毕
+// 应当使用传统的for循环
+
+// 更进一步, 如果想要循环中的操作并发执行, 使用for await
+
+// Promise.all将多个promise实例包装成一个新的promise实例, 返回结果数组
+// Promise.race 返回最快的
+
+// await - 阻塞后面的代码
+// 如果返回reject，await后面都不会执行了，需要用try catch
