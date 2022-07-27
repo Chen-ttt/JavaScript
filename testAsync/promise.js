@@ -124,6 +124,25 @@ p6.then(() => {
   console.log(4) // 因此触发这里的then, 输出4
 })
 
+// 面试题2
+let p8 = new Promise((resolve) => {
+  setTimeout(() => {
+    console.log("面试题2 setTimeout")
+    resolve()
+  }, 0)
+  console.log("面试题2 promise")
+}).then((value) => {
+  console.log("面试题2 成功啦")
+})
+console.log("面试题2结束")
+
+// !!!注意 new Promise中的宏任务会放入任务队列, 到下一轮时间循环才执行
+// 但会先于该promise对象的then, 虽然then是微任务, 但在promise对象状态未被确定时, then回调一直被挂起
+// 需要等待发起函数new Promise的返回值, 根据返回结果才能决定是否执行回调或执行哪个回调
+// 最后才注册相应的回调函数并放入任务队列, 待主线程空闲时, 该微任务被推入主线程
+
+// !!!注意 将上述例子中的setTimeout换成resolve()/Promise.resolve()等也是一样的, 都是宏任务
+
 
 // 如果需要在循环中执行异步操作, 不可以使用forEach或map这一类方法
 // 因为forEach或map会立即返回, 并不会等到所有的异步操作都执完毕
@@ -136,3 +155,10 @@ p6.then(() => {
 
 // await - 阻塞后面的代码
 // 如果返回reject，await后面都不会执行了，需要用try catch
+
+/**
+ * Promise.resolve()
+ * 1. 参数为空, 返回一个resolved状态的promise对象
+ * 2. 参数为Promise实例, 不作任何修改, 直接返回实例
+ * 3. 参数是具有then方法的对象(i.e.thenable对象), 将该对象转为promise对象, 并立即执行then方法
+ */
