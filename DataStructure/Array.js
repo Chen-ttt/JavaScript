@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-07-13 19:30:09
- * @LastEditTime: 2022-07-25 11:55:54
+ * @LastEditTime: 2022-07-27 23:22:38
  * @LastEditors:  
  */
 /**
@@ -59,3 +59,16 @@ console.log(result)
 var firstNum = arr1.shift()
 console.log("shift模拟队列: 首元素", firstNum)
 console.log("shift模拟队列: 首元素出队后", arr1)
+
+/**
+ * fill()
+ * 用参数指定的数据填满数组
+ */
+arr1.fill(0)
+console.log("After fill:", arr1)
+
+/**
+ * 创建二维数组 3*4
+ */
+var arr2D = new Array(3).fill(0).map(() => new Array(4).fill(0))
+console.log("2D array:", arr2D)
