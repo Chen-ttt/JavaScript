@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-07-07 16:59:08
- * @LastEditTime: 2022-08-04 22:26:00
+ * @LastEditTime: 2022-08-05 15:57:21
  * @LastEditors:  
  */
 /**
@@ -73,5 +73,19 @@ var str = [123, 456, 789]
 console.log(str.join('')) // 123456789
 console.log(str.join(',')) // 123,456,789
 
+/**
+ * toLowerCase - 转为小写
+ * toUpperCase - 转为大写
+ * 如果已经是小写/大写, 或者根本不是字母, 则不变
+ */
+
+var ch = 'A'
+console.log(ch.toLowerCase())
+ch = 'a'
+console.log(ch.toLowerCase())
+console.log(ch.toUpperCase())
+ch = '1'
+console.log(ch.toLowerCase())
+console.log(ch.toUpperCase())
 
 
