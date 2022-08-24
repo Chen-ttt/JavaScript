@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-07-13 19:30:09
- * @LastEditTime: 2022-08-04 17:14:06
+ * @LastEditTime: 2022-08-24 18:33:12
  * @LastEditors:  
  */
 /**
@@ -107,3 +107,111 @@ console.log([45, 5, 412].sort((a, b) => {
   console.log(a, b)
   return b - a // 反之
 }))
+
+
+/**
+ * concat() - 合并两个或多个数组, 返回一个合并后的新数组
+ */
+
+let a1 = [1, 2, 3]
+let a2 = [4, 5, 6]
+let a3 = [7, 8, [9, 10]]
+let num = 11
+
+let re = a1.concat(a2)
+console.log("concat a1 & a2", re)
+
+let re1 = a1.concat(a2, a3, num)
+console.log("concat a1 & a2 & a3 & num", re1) // 数字也可以被拼接进去
+// 但嵌套数组中的元素不会被拍平
+
+let re2 = a1.concat()
+console.log("concat不传入参数, 相当于执行一次深拷贝", re2)
+
+
+/**
+ * reduce(callback, [initialValue])
+ * 按照升序, 对数组中每个元素依次执行回调函数, 不包括被删除和从未被赋值的元素
+ * 
+ * callback参数:
+ *    1. accumulation: 截至当前元素, 所有之前元素被reduce处理的累计的结果
+ *    2. current: 当前被执行的数组元素
+ *    3. currentIndex: 当前元素index
+ *    4. sourceArray: 调用reduce方法的数组
+ */
+
+console.log(a1.reduce((total, current, curIndex, arr) => {
+  console.log("total:", total, "current", current, "curIndex", curIndex)
+  return total + current
+}))
+
+// 如果传入初始值, 则以初始值作为起点
+console.log(a1.reduce((total, current, curIndex, arr) => {
+  console.log("total:", total, "current", current, "curIndex", curIndex)
+  return total + current
+}, 10))
+
+// 用法
+// 求和
+console.log("a2 sum", a2.reduce((a, b) => a + b))
+// 求乘积
+console.log("a2 multiply", a2.reduce((a, b) => a * b))
+
+// 统计每个元素出现次数
+let names = ['Anna', 'Ben', 'Tong', 'Ben', 'Ben']
+let nameNum = names.reduce((pre, cur) => {
+  if (cur in pre) {
+    pre[cur]++
+  } else {
+    pre[cur] = 1
+  }
+  return pre
+}, {})
+console.log("统计个数: ", nameNum)
+
+// 数组去重
+let nameDeSame = names.reduce((prev, cur) => {
+  if (prev.includes(cur)) {
+    return prev
+  } else {
+    prev.push(cur)
+    return prev
+  }
+}, [])
+console.log("去重: ", nameDeSame)
+
+// flatten 见ArrFlatten.js
+
+/**
+ * some(回调函数(item, index, arr)) - 判断数组中至少存在一个满足指定条件的元素, 返回Boolean
+ * 对每个元素执行回调函数, 直到找到回调函数返回true的元素, 就返回true, 不再继续遍历; 否则返回false
+ * 回调函数的参数中只有item是必要的
+ */
+
+let marks = [90, 91, 97, 80, 40]
+let great = marks.some(item => item > 95)
+console.log("great: ", great)
+let bad = marks.some(item => item < 20)
+console.log("bad: ", bad)
+
+/**
+ * every(回调函数(item, index, arr)) - 判断数组元素是否全部满足条件, 返回Boolean
+ */
+
+let allGreat = marks.every(item => item > 95)
+console.log("allGreat: ", allGreat)
+let allOK = marks.every(item => item > 20)
+console.log("allOK: ", allOK)
+
+/**
+ * find(回调函数) - 对每个元素执行回调, 返回第一个符合条件的元素(找到后停止遍历, 直接返回)
+ * 如果没有符合条件的元素, 则返回undefined
+ */
+let findGreat = marks.find(item => item > 95)
+console.log("findGreat", findGreat)
+let findBad = marks.find(item => item < 20)
+console.log("findBad", findBad)
+
+/**
+ * filter() - 返回所有符合条件的元素, 返回一个新数组
+ */
