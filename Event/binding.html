@@ -1,0 +1,136 @@
+<!--
+ * @Description: 
+ * @Author: Tong Chen
+ * @Date: 2022-08-27 20:59:11
+ * @LastEditTime: 2022-08-27 21:30:14
+ * @LastEditors:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    div {
+      width: 300px;
+      height: 300px;
+      background-color: pink;
+    }
+
+    #box2 {
+      width: 200px;
+      height: 200px;
+      background-color: yellow;
+    }
+
+    #box3 {
+      width: 100px;
+      height: 100px;
+      background-color: skyblue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 事件绑定 (分为DOM0级和DOM2级) -->
+  <!-- DOM0级: 1. 行内式定义 -->
+  <div onclick="console.log('click the div')">div1</div>
+
+  <div id="div2">div2</div>
+
+  <!-- 2. 匿名函数 -->
+  <script>
+    let div = document.getElementById('div2')
+    div.onclick = () => { console.log("click the div2", this) }
+    div.onclick = function () { console.log("click the div2 - 2", this) }
+    // function关键字定义时, this指向dom节点本身, 而箭头函数定义的, this指向window
+
+    // 如何移除? - 本质上是属性赋值, 因此直接赋值为null即可移除
+    div.onclick = null
+  </script>
+
+  <!-- 对于DOM0级事件, 无论是行内式定义还是匿名函数定义的, 该click事件都只能注册一次, 后面定义的会覆盖前面定义的, 因为本质上是对对象属性进行赋值 -->
+
+
+  <!-- DOM2级事件: 事件监听 - DOM2级事件可以注册多个, 按照定义顺序执行 -->
+  <script>
+    // addEventListener(event,fuction,userCapture)
+    div.addEventListener("click", () => {
+      console.log("click the div2 from EventListener 1st")
+    })
+    div.addEventListener("click", () => {
+      console.log("click the div2 from EventListener 2nd")
+    })
+    div.addEventListener("click", () => {
+      console.log("click the div2 from EventListener 3rd")
+    })
+
+    // 如何移除? - removeEventListener(event, function)
+    // 如果定义时函数用的是匿名函数, 则无法移除
+
+    function fn () { console.log("will be removed") }
+    div.addEventListener("click", fn)
+    div.removeEventListener("click", fn)
+  </script>
+
+
+  <div id="box1">
+    box1
+    <div id="box2">
+      box2
+      <div id="box3">box3</div>
+    </div>
+  </div>
+
+
+  <script>
+    /**
+     * JS 事件机制
+     * 
+     * 1. 事件捕获: 当用户触发某个事件, 浏览器从顶层document元素发出一个事件流, 事件流顺着DOM逐层向下查找触发事件的目标元素
+     *             document -> Element html -> Element body -> Element div
+     * 2. 事件目标: 查找到目标元素后, 执行目标元素所绑定的事件函数
+     * 3. 事件冒泡: 从目标元素开始, 逐层向上 依次触发 那些捕获阶段发现的 父级元素的相同的绑定事件
+     * 
+     */
+
+    /**
+     * element.addEventListener(event, function, useCapture)
+     * 该函数接收三个参数, 第三个参数是boolean值
+     * true表示事件在捕获阶段执行
+     * false表示事件在冒泡阶段执行(false是默认值)
+     */
+
+    //  都设置为true, 则事件在捕获阶段被触发, box1 - box2 - box3
+    // 都设置为false, 或默认设置为false, 则事件在冒泡阶段被触发, box3 - box2 - box1
+
+    let box1 = document.getElementById('box1')
+    box1.addEventListener("click", (e) => {
+      // e.stopPropagation()
+      console.log("click box1")
+    })
+
+    let box2 = document.getElementById('box2')
+    box2.addEventListener("click", (e) => {
+      // e.stopPropagation()
+      console.log("click box2")
+    })
+
+    let box3 = document.getElementById('box3')
+    box3.addEventListener("click", (e) => {
+      e.stopPropagation() // 在此处阻止了事件冒泡之后, 将不触发box2和box1
+      console.log("click box3")
+    })
+
+    /**
+     * e.stopPropagation() - 阻止事件传播 - 无论是从上到下的捕获过程 还是 从下向上的冒泡过程都可以阻止
+     */
+  </script>
+</body>
+
+</html>
