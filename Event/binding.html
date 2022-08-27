@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-08-27 20:59:11
- * @LastEditTime: 2022-08-27 21:30:14
+ * @LastEditTime: 2022-08-27 22:10:19
  * @LastEditors:  
 -->
 <!DOCTYPE html>
@@ -31,6 +31,24 @@
       width: 100px;
       height: 100px;
       background-color: skyblue;
+    }
+
+    #box4 {
+      width: 300px;
+      height: 300px;
+      background-color: greenyellow;
+    }
+
+    #box5 {
+      width: 200px;
+      height: 200px;
+      background-color: orange;
+    }
+
+    #box6 {
+      width: 100px;
+      height: 100px;
+      background-color: khaki;
     }
   </style>
 </head>
@@ -130,6 +148,57 @@
     /**
      * e.stopPropagation() - 阻止事件传播 - 无论是从上到下的捕获过程 还是 从下向上的冒泡过程都可以阻止
      */
+  </script>
+
+  <div id="box4">
+    box4
+    <div id="box5">
+      box5
+      <div id="box6">box6</div>
+    </div>
+  </div>
+
+  <script>
+    // 1. DOM 0 在冒泡阶段执行, 如果同时存在DOM 0 和冒泡事件, 按照定义的顺序执行
+    // 2. 对于目标元素(点击的那个元素), 先执行捕获事件, DOM 0 和 冒泡事件 按定义的顺序执行
+    // 3. 对同一个元素的多个冒泡/捕获事件, 按照定义顺序执行
+
+    let box4 = document.getElementById('box4')
+    let box5 = document.getElementById('box5')
+    let box6 = document.getElementById('box6')
+
+    box4.addEventListener("click", (e) => {
+      console.log("click box4 捕获")
+    }, true)
+
+    box5.addEventListener("click", (e) => {
+      console.log("click box5 捕获")
+    }, true)
+
+    box6.addEventListener("click", (e) => {
+      console.log("click box6 捕获")
+    }, true)
+
+    box4.addEventListener("click", (e) => {
+      console.log("click box4 冒泡")
+    })
+
+    box4.onclick = () => { console.log("click box4 DOM 0") }
+
+    box5.onclick = () => { console.log("click box5 DOM 0") }
+    box5.addEventListener("click", (e) => {
+      console.log("click box5 冒泡")
+    })
+
+    box6.addEventListener("click", (e) => {
+      console.log("click box6 冒泡 第一次")
+    })
+
+    box6.addEventListener("click", (e) => {
+      console.log("click box6 冒泡 第二次")
+    })
+
+    box6.onclick = () => { console.log("click box6 DOM 0") }
   </script>
 </body>
 
