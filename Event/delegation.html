@@ -1,0 +1,49 @@
+<!--
+ * @Description: 
+ * @Author: Tong Chen
+ * @Date: 2022-08-27 21:31:29
+ * @LastEditTime: 2022-08-27 21:52:40
+ * @LastEditors:  
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- 事件委托 -->
+  <!-- 好处: 1. 不需要给所有子元素循环绑定事件, 减少dom交互, 提高性能 -->
+  <!-- 2. 不需要给新添加的子元素绑定事件, 添加子元素会自动有相应的事件 -->
+  <ul id="myUL">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+
+  <script>
+    // 原理: 事件冒泡
+    // 如果给列表中每一个li添加事件监听, 非常消耗性能
+    // 因此我们只需要给父元素添加事件监听, 在用户点击某个li元素时, 顶层document元素发出事件流, 不断向下寻找事件目标
+    // 找到触发click事件的li元素之后, 再向上冒泡, 触发绑定了click事件的父元素的回调函数
+    // 因此, 无论点击哪个li元素, ul绑定的click事件都会在冒泡阶段被触发
+    let ul = document.getElementById("myUL")
+    ul.addEventListener("click", (e) => {
+      // 以下两步为了兼容IE
+      let e = e || window.event
+      let target = e.target || e.srcElement
+      if (target.nodeName.toLowerCase() === 'li') { // 通过e.target.nodeName判断是哪个子元素的标签触发了click事件(返回值是大写, 可以用toLowerCase转换成小写)
+        console.log("click occur")
+      }
+    })
+  </script>
+</body>
+
+</html>
