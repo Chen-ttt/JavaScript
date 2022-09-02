@@ -50,7 +50,9 @@ p1.then(() => {
 })
 
 //  2b. resolved状态下, 执行then回调, 且默认返回一个resovled的promise
+// (但一开始只能拿到pending状态的promise, 因为then还没执行)
 const p4 = Promise.resolve()
+console.log("p4:", p4)
 const res = p4.then(() => {
   console.log("p4 then执行啦")
 }).catch(() => {
@@ -58,8 +60,8 @@ const res = p4.then(() => {
 })
 
 // 默认返回一个resovled状态的promise
-// 由于异步回调, 打印时状态为pending, 点开状态是fulfilled
-console.log("p4第二次回调返回:", res)
+// 由于异步回调, 打印时状态为pending, 点开状态是fulfilled(因为then被放到微任务队列, 等执行到then时才返回resolved状态的promise)
+console.log("p4第1次回调返回:", res)
 
 const res1 = p4.then(() => {
   console.log("p4的第二个then执行啦")
@@ -68,7 +70,7 @@ const res1 = p4.then(() => {
 
 // 如果手动抛出异常, 则返回一个rejected状态的promise
 // 由于异步回调, 打印时状态为pending, 点开状态是rejected
-console.log("p4第一次回调返回:", res1)
+console.log("p4第2次回调返回:", res1)
 
 //  2c. rejected状态下, 执行catch回调, 且默认返回一个resovled的promise
 const p5 = Promise.reject()
