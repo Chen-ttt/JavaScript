@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Tong Chen
  * @Date: 2022-07-13 19:30:09
- * @LastEditTime: 2022-08-24 18:33:12
+ * @LastEditTime: 2022-09-07 22:45:51
  * @LastEditors:  
  */
 /**
@@ -127,6 +127,8 @@ console.log("concat a1 & a2 & a3 & num", re1) // 数字也可以被拼接进去
 
 let re2 = a1.concat()
 console.log("concat不传入参数, 相当于执行一次深拷贝", re2)
+re2.push(99)
+console.log("是深拷贝嘛?", a1)
 
 
 /**
@@ -211,7 +213,3 @@ let findGreat = marks.find(item => item > 95)
 console.log("findGreat", findGreat)
 let findBad = marks.find(item => item < 20)
 console.log("findBad", findBad)
-
-/**
- * filter() - 返回所有符合条件的元素, 返回一个新数组
- */
