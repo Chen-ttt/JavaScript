@@ -2,22 +2,22 @@
  * 原型链
  */
 
-// 继承
+// 原型链继承
 // Professor - Teacher - Student
-Professor.prototype.topSkill = 'JAVA';
-function Professor(){};
-var professor = new Professor();
+Professor.prototype.topSkill = 'JAVA'
+function Professor () { };
+var professor = new Professor()
 
-Teacher.prototype = professor;
-function Teacher(){
-    this.goodSkill = 'JS',
+Teacher.prototype = professor
+function Teacher () {
+  this.goodSkill = 'JS',
     this.success = {
-        tencent: 10,
-        baidu: 20
+      tencent: 10,
+      baidu: 20
     }
 }
-var teacher = new Teacher();
-console.log(teacher);
+var teacher = new Teacher()
+console.log(teacher)
 // !!! 这里要理解
 /**
  * teacher = {
@@ -35,16 +35,16 @@ console.log(teacher);
  * }
  */
 
-Student.prototype = teacher;
-function Student(){
-    this.basicSkill = 'HTML'
+Student.prototype = teacher
+function Student () {
+  this.basicSkill = 'HTML'
 }
-var student = new Student();
+var student = new Student()
 
 // 原型链的终点 - Object.prototype!!! - Object.prototype里面再也没有proto了
 // !!!特例 - Object.create(null)返回的新对象没有原型
-console.log(student);
-console.log("空对象", Object.create(null));
+console.log(student)
+console.log("空对象", Object.create(null))
 /**
  * !!!注意
  * 1. Object.prototype底下保存了一个toString方法
@@ -67,11 +67,11 @@ console.log("空对象", Object.create(null));
  * 2. 引用值属性
  *    将修改父类success中的tencent数值, 本实例没有变化
  */
-student.goodSkill = 'CSS';
-console.log("修改原始值属性", student);
+student.goodSkill = 'CSS'
+console.log("修改原始值属性", student)
 
-student.success.tencent = 30;
-console.log("修改引用值属性", student);
+student.success.tencent = 30
+console.log("修改引用值属性", student)
 
 
 /**
@@ -81,27 +81,27 @@ console.log("修改引用值属性", student);
  * 好处:
  *     可以自定义原型, 让别的实例来成为自己的原型, 实现继承
  */
-function Obj(){};
-Obj.prototype.num = 1;
-var obj1 = Object.create(Obj.prototype);
-var obj2 = new Obj();
-console.log("通过Object.create和自定义构造函数原型创建对象", obj1); // 这俩一模一样
-console.log("通过自定义构造函数创建对象", obj2);
+function Obj () { };
+Obj.prototype.num = 1
+var obj1 = Object.create(Obj.prototype)
+var obj2 = new Obj()
+console.log("通过Object.create和自定义构造函数原型创建对象", obj1) // 这俩一模一样
+console.log("通过自定义构造函数创建对象", obj2)
 
 var testProto = {
-    num: 2
-};
-var obj3 = Object.create(testProto);
-console.log("通过Object.create创建对象", obj3); // 这个不一样
+  num: 2
+}
+var obj3 = Object.create(testProto)
+console.log("通过Object.create创建对象", obj3) // 这个不一样
 
 // !!!特例 - Object.create(null)返回的新对象没有原型
-var nullObj = Object.create(null);
+var nullObj = Object.create(null)
 // 可以手动添吗?
-nullObj.prototype= {
-    num: 1
-};
-console.log("给空对象添加原型", nullObj);
-console.log("给空对象添加原型", nullObj.num);
+nullObj.prototype = {
+  num: 1
+}
+console.log("给空对象添加原型", nullObj)
+console.log("给空对象添加原型", nullObj.num)
 
 // 结果undefined
 // 原因: prototype作为键值被添加; 而原型不能手动添加; 可以更改, 不能自造
@@ -116,13 +116,13 @@ console.log("给空对象添加原型", nullObj.num);
 // console.log(undefined.toString());
 // console.log(null.toString());
 // 复习
-var num = 1;
-console.log("包装类的tostring", num.toString());
-console.log("原型上继承来的toString", obj1.toString());
+var num = 1
+console.log("包装类的tostring", num.toString())
+console.log("原型上继承来的toString", obj1.toString())
 
 // 笔试题
-document.write(num); // document.write有隐式的类型转换, 会调用参数的toString方法
-document.write(obj1);
-document.write(nullObj); // 因此这行将报错
+document.write(num) // document.write有隐式的类型转换, 会调用参数的toString方法
+document.write(obj1)
+document.write(nullObj) // 因此这行将报错
 
 // 可以重写原型链上的方法
