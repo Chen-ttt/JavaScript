@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Tong Chen
  * @Date: 2022-09-23 23:26:11
- * @LastEditTime: 2022-09-27 15:52:18
+ * @LastEditTime: 2022-09-27 15:53:19
  * @LastEditors:
 -->
 
@@ -18,9 +18,7 @@
 
 ### 2. Mobx: 一个透明函数响应式编程, Action + Store + Derivation
 
-      <br>
       Derivation - 从应用状态中派生出来, 且没有任何其他影响的数据
-      <br>
       1. Computed Values - 使用纯函数计算/从当前可观察的状态中获取
       2. Reactions - 状态变更时, 自动发生的副作用
 
