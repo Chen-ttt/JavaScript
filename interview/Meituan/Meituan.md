@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Tong Chen
  * @Date: 2022-09-27 21:46:55
- * @LastEditTime: 2022-09-30 14:06:44
+ * @LastEditTime: 2022-10-11 11:49:59
  * @LastEditors:
 -->
 
@@ -10,10 +10,14 @@
 
 ## 一面
 
-1. 介绍项目, 项目里有什么优化的地方 (useMemo, 图片懒加载)
+1. 介绍项目, 项目里有什么性能优化的地方
+
+- useMemo
+- 图片懒加载
 
 2. 为什么用 Redux, Redux 和 Mobx 区别
-   https://github.com/Chen-ttt/JavaScript/blob/master/interview/t.md
+
+   > https://github.com/Chen-ttt/JavaScript/blob/master/interview/Redux_Mobx.md
 
 3. Commonjs
 
@@ -102,7 +106,7 @@ import A from ...
 
 6. 为什么用 indexedDB ? 和前端其他储存相比, 有什么区别 (cookie / sessionStorage / localStorage)
 
-- https://github.com/Chen-ttt/JavaScript/tree/master/interview
+   > https://github.com/Chen-ttt/JavaScript/tree/master/interview
 
 7. 解释进程线程, 进程之间如何通信
 
@@ -220,11 +224,12 @@ import A from ...
   - 对称加密是为了之后的通信, 以为非对称加密的加密效率非常低, 在大量数据通信的场景下, 其效率是无法接受的
 
 13. 看代码说输出
-    https://github.com/Chen-ttt/JavaScript/blob/master/interview/console.js
+
+    > https://github.com/Chen-ttt/JavaScript/blob/master/interview/Meituan/console.js
 
 14. 代码: 写一个防抖函数
 
 15. 说一下数组和链表的区别
 
 16. 代码: 旋转链表
-    https://github.com/Chen-ttt/JavaScript/blob/master/interview/rotateLinkedList.js
+    > https://github.com/Chen-ttt/JavaScript/blob/master/interview/Meituan/rotateLinkedList.js
