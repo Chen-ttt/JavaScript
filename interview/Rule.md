@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Tong Chen
  * @Date: 2022-09-29 09:27:33
- * @LastEditTime: 2022-10-10 00:29:26
+ * @LastEditTime: 2022-10-10 14:09:03
  * @LastEditors:
 -->
 
@@ -214,13 +214,20 @@
   - 只记录关键信息, 这些信息可以帮助开发者诊断问题
 
 - 异常监控
+
   > 主要用于上报一些意外的或者致命性的异常; 不包括一些预料之内的异常 (eg. 用户输入错误, 网络错误等等)
+
   1. 全局捕获
-     > 使用 window.onerror 或 unhandledrejection
+     > - 捕获资源加载失败的错误: 通过 addEventListener('error', callback, true)
+     > - 捕获 js 执行错误: 使用 window.onerror
+     > - 捕获 promise 错误: addEventListener('unhandledrejection', callback), 但没有行数列数等信息, 只能手动抛出相关错误
   2. 主动上报
      > try/catch
   3. 用户反馈
+
      > 利用弹窗让用户填写反馈信息
+
+  4. 可以维护一个错误数组 errors, 在捕获到错误时添加到相关数组, 一段时间内统一上报
 
 ## 前后端协作规范
 
