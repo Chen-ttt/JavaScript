@@ -53,3 +53,32 @@ function taskTime (nums) {
 }
 
 console.log(taskTime([1, 1, 1, 2, 2, 2]))
+
+
+// 单调栈解法
+
+function findNearestTask(nums=[]){
+    let stack = [nums.length-1]
+    let res = new Array(nums.length).fill(-1)
+    for(let i = nums.length-2;i>=0;i--){
+        const top = stack[stack.length-1]
+        if(nums[i] >= nums[top]){
+            stack.push(i)
+        }else{
+            while(nums[i] < nums[stack[stack.length-1]]){
+                res[stack[stack.length-1]] = i
+                stack.pop()
+            }
+            stack.push(i)
+        }
+    }
+    res.forEach((value,index) => {
+        if(value === -1) res[index] = -1
+        else{
+            res[index] = nums[value]
+        }
+    })
+    return res
+}
+
+
