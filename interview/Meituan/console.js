@@ -1,6 +1,14 @@
+/*
+ * @Description: 
+ * @Author: Tong Chen
+ * @Date: 2022-09-27 21:37:33
+ * @LastEditTime: 2022-10-11 11:48:14
+ * @LastEditors:  
+ */
 
 // 美团一面
 // 看代码说输出
+// 注意: process.nextTick属于微任务, 且优先级最高
 
 console.log('1: script start')
 
