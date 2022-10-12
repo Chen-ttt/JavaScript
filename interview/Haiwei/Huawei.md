@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Tong Chen
  * @Date: 2022-10-11 11:08:18
- * @LastEditTime: 2022-10-11 11:42:24
+ * @LastEditTime: 2022-10-12 16:20:24
  * @LastEditors:
 -->
 
@@ -58,3 +58,8 @@
   - 闭包
   - 类和对象, 继承
 - 是否了解 C 语言 ? 说一说对栈内存和堆内存的理解 ?
+
+## 二面
+
+- 代码题
+  > https://github.com/Chen-ttt/JavaScript/blob/master/interview/Haiwei/splitArray.js
