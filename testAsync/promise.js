@@ -65,7 +65,12 @@ console.log("p4第1次回调返回:", res)
 
 const res1 = p4.then(() => {
   console.log("p4的第二个then执行啦")
-  throw new Error('Error of p4')
+  throw new Error('Error of p4') // throw new Error表示抛出一个错误, 因此会进入下面第一个catch回调
+  // 但如果是return new Error, 则将进入下面第一个then回调, 因为return的东西不是promise类型时, 将会返回一个被promise.resolve包裹的promise, 此时就会进入第一个then
+}).then(() => {
+  console.log("enter then !!!!")
+}).catch(() => {
+  console.log("enter catch !!!!")
 })
 
 // 如果手动抛出异常, 则返回一个rejected状态的promise
@@ -124,6 +129,8 @@ p6.then(() => {
   throw new Error('') // 抛出异常, 因此此处返回一个rejected状态的promise
 }).catch(() => {
   console.log(4) // 因此触发这里的then, 输出4
+}).then(() => {
+  console.log(5)
 })
 
 // 面试题2
